@@ -1,0 +1,11 @@
+<template>
+  <v-container>
+    <task-modal v-if="isTaskModalOpen" :isOpen="isTaskModalOpen" @close="toggleTaskModal" @taskSave="onTaskSave" />
+    <v-row align="center" justify="center">
+      <v-col cols="auto">
+        <v-btn color="info" @click="toggleTaskModal">Add New Task</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+<script src="./todoList.js"></script>
