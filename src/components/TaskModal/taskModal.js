@@ -24,7 +24,7 @@ export default {
         date: this.dueDate
       }
       this.$emit('taskSave', newTask)
-      this.onClose
+      this.onClose()
     },
     onTitleInput(event) {
       this.title = event.target.value
