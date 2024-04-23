@@ -1,4 +1,10 @@
+import Datepicker from '@vuepic/vue-datepicker'
+import '@vuepic/vue-datepicker/dist/main.css'
+
 export default {
+  components: {
+    Datepicker
+  },
   props: {
     isOpen: {
       type: Boolean,
@@ -19,15 +25,23 @@ export default {
     },
     onSave() {
       const newTask = {
-        title: this.title,
-        description: this.description,
-        date: this.dueDate
+        title: this.title.trim(),
+        description: this.description
       }
+      if (this.dueDate) {
+        newTask.date = this.dueDate.toISOString().slice(0, 10)
+      }
+
       this.$emit('taskSave', newTask)
-      this.onClose()
     },
+
     onTitleInput(event) {
       this.title = event.target.value
+    }
+  },
+  computed: {
+    isSaveDisabled() {
+      return !this.title.trim()
     }
   }
 }

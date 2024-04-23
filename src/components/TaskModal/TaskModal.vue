@@ -13,7 +13,8 @@
                 <v-textarea label="Description" v-model="description"></v-textarea>
               </v-col>
               <v-col cols="12" sm="12">
-                <!-- <v-date-picker /> -->
+                Due date
+                <datepicker v-model="dueDate" />
               </v-col>
             </v-row>
 
@@ -27,7 +28,13 @@
 
             <v-btn color="warning" text="Close" variant="plain" @click="onClose"></v-btn>
 
-            <v-btn color="success" text="Save" variant="tonal" @click="onSave"></v-btn>
+            <v-btn
+              :disabled="isSaveDisabled"
+              color="success"
+              text="Save"
+              variant="tonal"
+              @click="onSave"
+            ></v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
