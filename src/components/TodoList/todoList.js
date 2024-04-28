@@ -3,7 +3,7 @@ import Task from '../Task/Task.vue'
 
 export default {
   components: {
-    TaskModal,git branch
+    TaskModal,
     Task
   },
   data() {
@@ -17,6 +17,7 @@ export default {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
     onTaskSave(task) {
+      consolr.log(task)
       const url = 'http://localhost:3001/task'
       const params = {
         method: 'POST',
