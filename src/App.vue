@@ -12,3 +12,4 @@ export default {
     <todo-list />
   </main>
 </template>
+./components/TodoList/TodoList.vue

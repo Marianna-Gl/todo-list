@@ -13,7 +13,7 @@
 
     <v-card-text> Created at: {{ createdAt }} </v-card-text>
 
-    <v-card-text> Due date: {{ dataShort }} </v-card-text>
+    <v-card-text> Due date: {{ dateShort }} </v-card-text>
 
 
     <v-card-actions>
