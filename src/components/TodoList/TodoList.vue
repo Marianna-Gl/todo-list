@@ -13,7 +13,10 @@
     </v-row>
   </v-container>
   <v-container>
-    <v-row><task v-for="taskData in tasks" :data="taskData" :key="taskData._id" /> </v-row>
+    <v-row>
+      <task :data="{ title: 'new task', created_at: 'gvhvgg', date: 'ffff' }" key="stfsdf" />
+      <task v-for="taskData in tasks" :data="taskData" :key="taskData._id" />
+    </v-row>
   </v-container>
 </template>
 <script src="./todoList.js"></script>

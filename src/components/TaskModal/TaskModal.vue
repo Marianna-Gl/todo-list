@@ -34,7 +34,7 @@
             <v-btn color="warning" text="Close" variant="plain" @click="onClose"></v-btn>
 
             <v-btn
-              :disabled="isTitleValid"
+              :disabled="!isTitleValid"
               color="success"
               text="Save"
               variant="tonal"
