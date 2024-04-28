@@ -10,7 +10,7 @@ export default {
       return this.data.created_at.slice(0, 10)
     },
     dateShort() {
-      return this.data.date.slice(0, 10)
+      return this.data.date?.slice(0, 10) || 'none'
     }
   }
 }
