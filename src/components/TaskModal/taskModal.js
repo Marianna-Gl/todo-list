@@ -9,7 +9,8 @@ export default {
     isOpen: {
       type: Boolean,
       required: true
-    }
+    },
+    editingTask: Object
   },
 
   data() {
@@ -17,6 +18,14 @@ export default {
       title: '',
       description: '',
       dueDate: ''
+    }
+  },
+  created() {
+    console.log(this.editingTask)
+    if (this.editingTask) {
+      this.title = this.editingTask.title
+      this.description = this.editingTask.description
+      this.dueDate = new Date(this.editingTask.date)
     }
   },
   methods: {
@@ -29,10 +38,17 @@ export default {
         description: this.description
       }
       if (this.dueDate) {
-        newTask.date = this.dueDate.toISOString().slice(0, 10)
+        task.date = this.dueDate.toISOString().slice(0, 10)
+      }
+      if (this.editingTask) {
+        this.$emit('taskSave', {
+          ...this.editingTask,
+          ...task
+        })
+        return
       }
 
-      this.$emit('taskSave', newTask)
+      this.$emit('taskAdd', task)
     },
 
     onTitleInput(event) {
@@ -42,6 +58,12 @@ export default {
   computed: {
     isTitleValid() {
       return !!this.title.trim()
+    },
+    modalTitle() {
+      if (this.editingTask) {
+        return 'Edit task'
+      }
+      return 'Add new task'
     }
   }
 }
