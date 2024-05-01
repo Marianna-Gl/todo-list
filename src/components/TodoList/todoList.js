@@ -44,7 +44,7 @@ export default {
         })
         .catch(this.handleError)
     },
-    onTasAdd(task) {
+    onTaskAdd(task) {
       taskApi
         .addNewTask(task)
         .then((newTask) => {
@@ -53,26 +53,20 @@ export default {
           this.$toast.success('The task has been created successfully!')
         })
         .catch(this.handleError)
-      },
-      onTaskSave(editedTask) {
-        console.log('editedTask', editedTask)
-        taskApi
-          .updateTask(editedTask)
-          .then((updatedTask) => {
-            // find and replace the task
-            // use findIndex  this.tasks  task._id === updatedTask._id
-            // this.tasks[index] = updatedTask
-            // close the task modal
-            this.$toast.success('The task have been updated successfully!')
-          })
-          .catch(this.handleError)
-      },
-      handleError(error) {
-        this.$toast.error(error.message)
-      },
-      onTaskEdit(editingTask) {
-        console.log('taskedit')
-        this.editingTask = editingTask
-      }
+    },
+    onTaskSave(editedTask) {
+      taskApi
+        .updateTask(editedTask)
+        .then((updatedTask) => {
+          this.$toast.success('The task has been updated successfully!')
+        })
+        .catch(this.handleError)
+    },
+    handleError(error) {
+      this.$toast.error(error.message)
+    },
+    onTaskEdit(editingTask) {
+      this.editingTask = editingTask
     }
   }
+}

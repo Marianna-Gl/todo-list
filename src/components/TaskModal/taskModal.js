@@ -21,11 +21,11 @@ export default {
     }
   },
   created() {
-    console.log(this.editingTask)
     if (this.editingTask) {
-      this.title = this.editingTask.title
-      this.description = this.editingTask.description
-      this.dueDate = new Date(this.editingTask.date)
+      const { title, description, date } = this.editingTask
+      this.title = title
+      this.description = description
+      this.dueDate = date ? new Date(date) : ''
     }
   },
   methods: {
@@ -33,7 +33,7 @@ export default {
       this.$emit('close')
     },
     onSave() {
-      const newTask = {
+      const task = {
         title: this.title.trim(),
         description: this.description
       }
