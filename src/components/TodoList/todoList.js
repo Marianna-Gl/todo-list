@@ -1,5 +1,8 @@
 import TaskModal from '../TaskModal/TaskModal.vue'
 import Task from '../Task/Task.vue'
+import TaskApi from '../../utils/taskApi.js'
+
+const taskApi = new TaskApi()
 
 export default {
   components: {
@@ -9,41 +12,61 @@ export default {
   data() {
     return {
       isTaskModalOpen: false,
-      tasks: []
+      tasks: [],
+      editingTask: null
+    }
+  },
+  created() {
+    this.getTasks()
+  },
+  watch: {
+    editingTask(newValue) {
+      if (newValue) {
+        this.isTaskModalOpen = true
+      }
+    },
+    isTaskModalOpen(isOpen) {
+      if (!isOpen && this.editingTask) {
+        this.editingTask = null
+      }
     }
   },
   methods: {
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
-    onTaskSave(task) {
-      const url = 'http://localhost:3001/task'
-      const params = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(task)
-      }
 
-      fetch(url, params)
-        .then(async (res) => {
-          if (res.status >= 500) {
-            throw new Error('Something went wrong, please, try again later!')
-          }
-          const result = await res.json()
-          if (res.status >= 300 && result.error) {
-            throw new Error(result.error.message)
-          }
-          return result
+    getTasks() {
+      taskApi
+        .getTasks()
+        .then((tasks) => {
+          this.tasks = tasks
         })
+        .catch(this.handleError)
+    },
+    onTaskAdd(task) {
+      taskApi
+        .addNewTask(task)
         .then((newTask) => {
           this.tasks.push(newTask)
           this.toggleTaskModal()
+          this.$toast.success('The task has been created successfully!')
         })
-        .catch((err) => {
-          console.log('err', err)
+        .catch(this.handleError)
+    },
+    onTaskSave(editedTask) {
+      taskApi
+        .updateTask(editedTask)
+        .then((updatedTask) => {
+          this.$toast.success('The task has been updated successfully!')
         })
+        .catch(this.handleError)
+    },
+    handleError(error) {
+      this.$toast.error(error.message)
+    },
+    onTaskEdit(editingTask) {
+      this.editingTask = editingTask
     }
   }
 }
