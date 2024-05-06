@@ -1,5 +1,6 @@
 class TaskApi {
-  apiHost = import.meta.env.VITE_API_HOST
+  // apiHost = import.meta.env.VITE_API_HOST
+  apiHost = 'http://localhost:3001'
   request(method, url = '', body) {
     const params = {
       method,
@@ -12,6 +13,7 @@ class TaskApi {
     }
 
     const host = `${this.apiHost}/task/${url}`
+   
     return fetch(host, params).then(async (res) => {
       if (res.status >= 500) {
         throw new Error('Something went wrong, please, try again later!')
