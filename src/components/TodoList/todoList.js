@@ -85,6 +85,7 @@ export default {
       this.tasks[index] = updatedTask
     },
     handleError(error) {
+     
       this.$toast.error(error.message)
     },
     onTaskEdit(editingTask) {

@@ -1,6 +1,8 @@
+console.log('import.meta.env.VITE_API_HOST', import.meta.env.VITE_API_HOST)
 class TaskApi {
   apiHost = import.meta.env.VITE_API_HOST
   // apiHost = 'http://localhost:3001'
+
   request(method, url = '', body) {
     const params = {
       method,
@@ -8,12 +10,12 @@ class TaskApi {
         'Content-Type': 'application/json'
       }
     }
+
     if (body) {
       params.body = JSON.stringify(body)
     }
 
     const host = `${this.apiHost}/task/${url}`
-  
 
     return fetch(host, params).then(async (res) => {
       if (res.status >= 500) {
@@ -21,6 +23,7 @@ class TaskApi {
       }
 
       const result = await res.json()
+
       if (res.status >= 300 && result.error) {
         throw new Error(result.error.message)
       }
