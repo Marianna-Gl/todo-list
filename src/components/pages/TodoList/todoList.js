@@ -1,7 +1,7 @@
-import TaskModal from '../TaskModal/TaskModal.vue'
-import Task from '../Task/Task.vue'
-import TaskApi from '../../utils/taskApi.js'
 
+import TaskModal from '../../TaskModal/TaskModal.vue'
+import Task from '../../Task/Task.vue'
+import TaskApi from '../../../utils/taskApi.js'
 const taskApi = new TaskApi()
 
 export default {
@@ -85,7 +85,6 @@ export default {
       this.tasks[index] = updatedTask
     },
     handleError(error) {
-     
       this.$toast.error(error.message)
     },
     onTaskEdit(editingTask) {
