@@ -1,7 +1,7 @@
-console.log('import.meta.env.VITE_API_HOST', import.meta.env.VITE_API_HOST)
+
 class TaskApi {
   apiHost = import.meta.env.VITE_API_HOST
-  // apiHost = 'http://localhost:3001'
+  
 
   request(method, url = '', body) {
     const params = {

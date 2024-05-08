@@ -40,7 +40,7 @@ export default {
         title: this.title.trim(),
         description: this.description
       }
-      console.log(this.dueDate)
+
       if (this.dueDate) {
         task.date = this.dueDate.toISOString().slice(0, 10)
       } else {
@@ -56,8 +56,6 @@ export default {
 
       this.$emit('taskAdd', task)
     }
-
-    
   },
   computed: {
     isTitleValid() {
