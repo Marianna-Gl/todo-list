@@ -9,13 +9,16 @@ export default {
     createdAt() {
       return this.data.created_at.slice(0, 10)
     },
-    dateShort() {
+    dueDate() {
       return this.data.date?.slice(0, 10) || 'none'
     }
   },
   methods: {
     onEdit() {
       this.$emit('taskEdit')
+    },
+    onDelete() {
+      this.$emit('taskDelete')
     }
   }
 }

@@ -28,6 +28,9 @@ export default {
       this.dueDate = date ? new Date(date) : ''
     }
   },
+  mounted() {
+    this.$refs.title.focus()
+  },
   methods: {
     onClose() {
       this.$emit('close')
@@ -37,8 +40,11 @@ export default {
         title: this.title.trim(),
         description: this.description
       }
+
       if (this.dueDate) {
         task.date = this.dueDate.toISOString().slice(0, 10)
+      } else {
+        task.date = ''
       }
       if (this.editingTask) {
         this.$emit('taskSave', {
@@ -49,10 +55,6 @@ export default {
       }
 
       this.$emit('taskAdd', task)
-    },
-
-    onTitleInput(event) {
-      this.title = event.target.value
     }
   },
   computed: {
