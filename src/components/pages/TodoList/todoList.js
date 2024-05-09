@@ -79,6 +79,7 @@ export default {
         })
         .catch(this.handleError)
     },
+  
 
     findAndReplaceTask(updatedTask) {
       const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
