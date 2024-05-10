@@ -1,4 +1,5 @@
 
+import { mapMutations } from 'vuex'
 import TaskModal from '../../TaskModal/TaskModal.vue'
 import Task from '../../Task/Task.vue'
 import TaskApi from '../../../utils/taskApi.js'
@@ -32,19 +33,25 @@ export default {
     }
   },
   methods: {
+    ...mapMutations(['toggleLoading']),
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
 
     getTasks() {
+      this.toggleLoading()
       taskApi
         .getTasks()
         .then((tasks) => {
           this.tasks = tasks
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     onTaskAdd(task) {
+      this.toggleLoading()
       taskApi
         .addNewTask(task)
         .then((newTask) => {
@@ -53,6 +60,9 @@ export default {
           this.$toast.success('The task has been created successfully!')
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     onTaskStatusChange(editedTask) {
       taskApi
