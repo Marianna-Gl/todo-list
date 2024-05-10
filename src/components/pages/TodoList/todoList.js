@@ -1,7 +1,7 @@
-import TaskModal from '../TaskModal/TaskModal.vue'
-import Task from '../Task/Task.vue'
-import TaskApi from '../../utils/taskApi.js'
 
+import TaskModal from '../../TaskModal/TaskModal.vue'
+import Task from '../../Task/Task.vue'
+import TaskApi from '../../../utils/taskApi.js'
 const taskApi = new TaskApi()
 
 export default {
@@ -79,13 +79,13 @@ export default {
         })
         .catch(this.handleError)
     },
+  
 
     findAndReplaceTask(updatedTask) {
       const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
       this.tasks[index] = updatedTask
     },
     handleError(error) {
-     
       this.$toast.error(error.message)
     },
     onTaskEdit(editingTask) {

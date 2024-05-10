@@ -19,6 +19,9 @@ export default {
     },
     onDelete() {
       this.$emit('taskDelete')
-    }
+    },  statusChange() {
+      this.$emit('taskStatus')
   }
-}
+},
+  }
+
