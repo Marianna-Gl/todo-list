@@ -6,7 +6,7 @@
         :isOpen="isEditModalOpen"
         :editingTask="task"
         @close="toggleTaskModal"
-        @taskSave="onSave"
+        @taskSave="onTaskSave"
       />
       <v-card-item>
         <v-card-title class="text-wrap" id="taskText"> {{ task.title }} </v-card-title>
@@ -22,19 +22,19 @@
 
       <v-card-text class="taskText"> Due date: {{ dueDate }} </v-card-text>
 
-      <div class="singleTaskButtons">
-        <v-card-actions>
-          <v-btn class="button" color="success" variant="elevated">
-            <v-icon icon="mdi-check-outline" />
-          </v-btn>
-          <v-btn class="button" color="warning" variant="elevated" @click="toggleTaskModal">
-            <v-icon icon="mdi-archive-edit-outline" />
-          </v-btn>
-          <v-btn class="button" color="error" variant="elevated" @click="onDelete">
-            <v-icon icon="mdi-delete-outline" />
-          </v-btn>
-        </v-card-actions>
-      </div>
+      <v-card-actions>
+        <v-btn class="button" color="success" variant="elevated" @click="onStatusChange(task)">
+          <v-icon v-if="active" icon="mdi-check-outline" />
+          <v-icon color="#B2DFDB" v-else icon="mdi-undo-variant" />
+        </v-btn>
+
+        <v-btn class="button" color="warning" variant="elevated" @click="toggleTaskModal">
+          <v-icon icon="mdi-archive-edit-outline" />
+        </v-btn>
+        <v-btn class="button" color="error" variant="elevated" @click="onDelete">
+          <v-icon icon="mdi-delete-outline" />
+        </v-btn>
+      </v-card-actions>
     </v-card>
     <h4 v-else>Task not found!</h4>
   </div>
