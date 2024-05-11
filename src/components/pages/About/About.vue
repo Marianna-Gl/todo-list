@@ -1,10 +1,9 @@
 <template>
   <div class="description">
     <h1>What is a todo list and how can it help in business and daily life?<br /></h1>
-    <br />
-    <br />
-
+    <
     <h2>
+      <br /><br />
       Do any of the following seem familiar?<br />
       <br />
 
@@ -21,7 +20,7 @@
 <style scoped>
 .description {
   text-align: center;
-  margin-top: 100px;
-  font-size:larger;
+  margin-top: 200px;
+  font-size: larger;
 }
 </style>

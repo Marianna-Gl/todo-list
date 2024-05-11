@@ -47,23 +47,25 @@
     variant="elevated"
     @click="toggleDeleteDialog"
   >
-    <v-icon icon="mdi-delete-outline" /> Delete selected
+    <v-icon icon="mdi-delete-outline" class="trashIcon" />
+    <span class="deleteText">Delete selected</span>
   </v-btn>
 </template>
 <script src="./todoList.js"></script>
 <style scoped>
 .delete-selected-btn {
   position: fixed;
-  right: -140px;
-  bottom: 40px;
+  right: -170px;
+  bottom: 80px;
 }
 .delete-selected-btn:hover {
   animation-name: btn-animation;
   animation-duration: 0.8s;
   right: 20px;
 }
+
 .addTask {
-  margin-top: 100px;
+  margin-top: 70px;
   font-size: x-large;
 }
 @keyframes btn-animation {
@@ -73,5 +75,12 @@
   to {
     right: 20px;
   }
+}
+.deleteText {
+  padding-left: 80px;
+  font-size: larger;
+}
+.trashIcon {
+  font-size: xx-large;
 }
 </style>
