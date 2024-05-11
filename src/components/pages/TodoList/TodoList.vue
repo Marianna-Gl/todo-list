@@ -18,7 +18,9 @@
 
     <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-btn color="info" @click="toggleTaskModal">Add new task</v-btn>
+        <v-btn class="addTask" color="#0097A7" @click="toggleTaskModal"
+          ><span color="">Add new task</span></v-btn
+        >
       </v-col>
     </v-row>
   </v-container>
@@ -52,13 +54,17 @@
 <style scoped>
 .delete-selected-btn {
   position: fixed;
-  right: -156px;
+  right: -140px;
   bottom: 40px;
 }
 .delete-selected-btn:hover {
   animation-name: btn-animation;
   animation-duration: 0.8s;
   right: 20px;
+}
+.addTask {
+  margin-top: 100px;
+  font-size: x-large;
 }
 @keyframes btn-animation {
   from {

@@ -1,6 +1,8 @@
 @import './base.css';
 
 body {
-    max-width: 1920px;
-    margin: auto;
-  }
+  max-width: 1920px;
+  margin: auto;
+  background-image: url('./images/todo.png');
+}
+
