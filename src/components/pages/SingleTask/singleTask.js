@@ -38,7 +38,7 @@ export default {
         .catch(this.handleError)
     },
     onSave(updatedTask) {
-      console.log('updatedTask', updatedTask)
+      taskApi
     },
     onDelete() {
       const taskId = this.task._id
@@ -53,5 +53,6 @@ export default {
     handleError(error) {
       this.$toast.error(error.message)
     }
+
   }
 }

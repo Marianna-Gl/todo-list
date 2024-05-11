@@ -58,6 +58,7 @@
 }
 .taskText {
   font-size: x-large;
+  margin-bottom: 20px;
 }
 .showText {
   font-size: larger;
