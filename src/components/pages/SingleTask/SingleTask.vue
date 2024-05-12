@@ -36,7 +36,12 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-    <h4 v-else>Task not found!</h4>
+    <h4 v-else>
+      <div class="backButton">
+        <v-btn class="homeBtn"><RouterLink to="/">GO BACK HOME</RouterLink></v-btn>
+      </div>
+      <div><img src="/src/assets/images/404-error-page-examples-best.webp" alt="" /></div>
+    </h4>
   </div>
 </template>
 
@@ -70,5 +75,10 @@
 #taskText {
   margin-bottom: 20px;
   font-size: x-large;
+}
+.homeBtn {
+  font-size: xx-large;
+  background-color: rgb(5, 5, 7);
+color: rgb(255, 240, 249);
 }
 </style>
