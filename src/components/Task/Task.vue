@@ -54,16 +54,16 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  font-size: x-large;
+  font-size: larger;
 }
 .taskText {
-  font-size: x-large;
+  font-size: larger;
   margin-bottom: 20px;
 }
 .showText {
-  font-size: larger;
+  font-size: large;
 }
 .button {
-  font-size: x-large;
+  font-size: larger;
 }
 </style>

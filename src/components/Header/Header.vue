@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" color="#01579B" max-width="448">
     <v-layout>
-      <v-app-bar color="#0288D1">
+      <v-app-bar color="#01579B">
         <template v-slot:image>
           <v-img
             gradient="(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef), linear-gradient(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef)"
@@ -30,13 +30,13 @@
 <script src="./header.js"></script>
 <style scoped>
 .home {
-  font-size: xx-large;
+  font-size: x-large;
 }
 .contact {
-  font-size: xx-large;
+  font-size: x-large;
 }
 .aboutUs {
-  font-size: xx-large;
+  font-size: x-large;
 }
 .todoLogo {
   width: 60px;

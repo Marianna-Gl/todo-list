@@ -18,7 +18,7 @@
 
     <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-btn class="addTask" color="light-blue-darken-3" @click="toggleTaskModal"
+        <v-btn class="addTask" color="light-blue-darken-2" @click="toggleTaskModal"
           ><span color="">Add new task</span></v-btn
         >
       </v-col>
@@ -66,7 +66,7 @@
 
 .addTask {
   margin-top: 70px;
-  font-size: x-large;
+  font-size: larger;
 }
 @keyframes btn-animation {
   from {
