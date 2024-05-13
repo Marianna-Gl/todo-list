@@ -18,7 +18,7 @@
 
     <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-btn class="addTask" color="#0097A7" @click="toggleTaskModal"
+        <v-btn class="addTask" color="light-blue-darken-3" @click="toggleTaskModal"
           ><span color="">Add new task</span></v-btn
         >
       </v-col>

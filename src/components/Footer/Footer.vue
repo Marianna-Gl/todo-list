@@ -1,7 +1,7 @@
 <template>
   <footer>
     <v-layout class="overflow-visible" style="height: 56px">
-      <v-bottom-navigation v-model="value">
+      <v-bottom-navigation v-model="value" :bg-color="color" >
         <v-btn>
           <span
             ><a href="https://www.linkedin.com/in/marianna-g-0906b1156/" target="_blank">
@@ -25,7 +25,7 @@
         <v-btn>
           <span
             ><a href="https://www.instagram.com/mar11.89/" target="_blank">
-              <img src="/src/assets/images/instagram.png "alt="here is a logo" /></a
+              <img src="/src/assets/images/instagram.png " alt="here is a logo" /></a
           ></span>
         </v-btn>
       </v-bottom-navigation>

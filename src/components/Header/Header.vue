@@ -1,9 +1,11 @@
 <template>
-  <v-card class="mx-auto" color="#0097A7" max-width="448">
+  <v-card class="mx-auto" color="#01579B" max-width="448">
     <v-layout>
-      <v-app-bar color="teal-darken-4" image="https://picsum.photos/1920/1080?random">
+      <v-app-bar color="#0288D1">
         <template v-slot:image>
-          <v-img gradient="to top right, rgba(19,84,122,.8), rgba(128,208,199,.8)"></v-img>
+          <v-img
+            gradient="(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef), linear-gradient(45deg, #efefef 25%, rgba(239, 239, 239, 0) 25%, rgba(239, 239, 239, 0) 75%, #efefef 75%, #efefef)"
+          ></v-img>
         </template>
 
         <template v-slot:prepend>
