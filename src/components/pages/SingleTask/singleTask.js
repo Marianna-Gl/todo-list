@@ -24,12 +24,8 @@ export default {
     dueDate() {
       return this.task.date?.slice(0, 10) || 'none'
     },
-    checked() {
-      return this.task.status === 'active' ? 'success' : 'primary'
-    },
-    active() {
-      return this.task.status === 'active'
-    }
+   
+    
   },
 
   methods: {
