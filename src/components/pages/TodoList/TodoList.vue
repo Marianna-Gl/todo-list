@@ -77,10 +77,10 @@
   }
 }
 .deleteText {
-  padding-left: 80px;
   font-size: larger;
 }
 .trashIcon {
   font-size: xx-large;
+  margin-right: 20px;
 }
 </style>

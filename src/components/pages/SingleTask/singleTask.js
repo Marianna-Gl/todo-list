@@ -54,7 +54,7 @@ export default {
         .updateTask(editingTask)
         .then(() => {
           this.toggleTaskModal()
-          this.$toast.success('The task have been updated successfully!')
+          this.$toast.success('The task has been updated successfully!')
         })
         .catch(this.handleError)
         .finally(() => {
@@ -68,27 +68,33 @@ export default {
         .deleteTask(taskId)
         .then(() => {
           this.$router.push('/')
-          this.$toast.success('The task have been deleted successfully!')
+          this.$toast.success('The task has been deleted successfully!')
         })
         .catch(this.handleError)
     },
     onStatusChange(editingTask) {
       this.toggleLoading()
-      this.task.status = editingTask.status === 'active' ? 'done' : 'active'
-      taskApi
-        .updateTask(editingTask)
-        .then(() => {
-          let message =
-            this.task.status === 'done' ? 'The task have been done!' : 'The task have been active!'
-          this.$toast.success(message)
-        })
-        .catch(this.handleError)
-        .finally(() => {
-          this.toggleLoading()
-        })
-    },
-    handleError(error) {
-      this.$toast.error(error.message)
-    }
+            const updatedTask={
+                ...this.task,
+                status: this.task.status==='active'? 'done':'active'
+            }
+            taskApi
+                .updateTask(updatedTask)
+                .then(() => {
+                    this.task=updatedTask
+                    let message
+                    if(this.task.status==='done'){
+                        message='Done!'
+                    }
+                    else{
+                        message='Restored!'
+                    }
+                    this.$toast.success(message)
+                })
+                .catch(this.handleError)
+                .finally(()=>{
+                    this.toggleLoading()
+                })
+        }
   }
 }

@@ -2,7 +2,7 @@
   <v-card class="mx-auto my-8" elevation="16" width="auto">
     <v-card-item>
       <v-checkbox @update:modelValue="onSelect" :modelValue="isSelected"></v-checkbox>
-      <v-card-title class="taskText"> {{ data.title }} </v-card-title>
+      <v-card-title id="taskText"> {{ data.title }} </v-card-title>
     </v-card-item>
 
     <v-card-text class="description">
@@ -59,6 +59,9 @@
 .taskText {
   font-size: larger;
   margin-bottom: 20px;
+}
+#taskText {
+  font-size: x-large;
 }
 .showText {
   font-size: large;

@@ -1,7 +1,7 @@
 <template>
   <div class="description">
     <h1>What is a todo list and how can it help in business and daily life?<br /></h1>
-    <
+    
     <h2>
       <br /><br />
       Do any of the following seem familiar?<br />

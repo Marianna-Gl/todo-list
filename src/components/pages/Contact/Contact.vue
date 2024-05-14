@@ -38,7 +38,7 @@
 <script src="./contact.js"></script>
 <style scoped>
 .contactForm {
-  margin-top: 200px;
+  margin-top: 50px;
 }
 .contactTiltle {
   text-align: center;

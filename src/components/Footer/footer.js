@@ -19,12 +19,7 @@ export default {
           return 'grey'
         case 1:
           return 'light-blue-darken-3'
-        // case 2:
-        //   return 'brown'
-        // case 3:
-        //   return 'indigo'
-        // default:
-        // return 'blue-grey'
+      
       }
     }
   }

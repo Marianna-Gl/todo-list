@@ -1,7 +1,7 @@
 <template>
   <footer>
     <v-layout class="overflow-visible" style="height: 56px">
-      <v-bottom-navigation v-model="value" :bg-color="color" >
+      <v-bottom-navigation  :bg-color="color" >
         <v-btn>
           <span
             ><a href="https://www.linkedin.com/in/marianna-g-0906b1156/" target="_blank">
