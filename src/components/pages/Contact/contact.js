@@ -24,10 +24,18 @@ export default {
         email: this.email,
         message: this.message
       }
-      sendForm(form)
-      // formApi.sendForm(form)
-      // if success this.reset()
-      // show notification
+      this.toggleLoading()
+      taskApi
+        .sendForm(form)
+        .then((form) => {
+          this.reset(form)
+          this.$toast.success('Thank you for contacting us, the form has been sent!')
+        })
+
+        .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     async validate() {
       const { valid } = await this.$refs.form.validate()
