@@ -24,8 +24,12 @@ export default {
     dueDate() {
       return this.task.date?.slice(0, 10) || 'none'
     },
-   
-    
+    checked() {
+      return this.task.status === 'active' ? 'success' : 'primary'
+    },
+    active() {
+      return this.task.status === 'active'
+    }
   },
 
   methods: {
@@ -69,28 +73,29 @@ export default {
         .catch(this.handleError)
     },
     onStatusChange(editingTask) {
-      this.toggleLoading()
-            const updatedTask={
-                ...this.task,
-                status: this.task.status==='active'? 'done':'active'
-            }
-            taskApi
-                .updateTask(updatedTask)
-                .then(() => {
-                    this.task=updatedTask
-                    let message
-                    if(this.task.status==='done'){
-                        message='Done!'
-                    }
-                    else{
-                        message='Restored!'
-                    }
-                    this.$toast.success(message)
-                })
-                .catch(this.handleError)
-                .finally(()=>{
-                    this.toggleLoading()
-                })
-        }
+      const editedTask = {
+        ...this.task,
+        status: editingTask.status === 'active' ? 'done' : 'active'
+      }
+
+      taskApi
+        .updateTask(editedTask)
+        .then(() => {
+          this.task.status = editedTask.status
+          let message
+          if (editedTask.status === 'done') {
+            message = 'The task is marked as Done successfully!'
+          } else {
+            message = 'The task is restored successfully!'
+          }
+          this.$toast.success(message)
+        })
+        .catch((err) => {
+          this.handleError(err)
+        })
+    },
+    handleError(err) {
+      this.$toast.error(err.message)
+    }
   }
 }
