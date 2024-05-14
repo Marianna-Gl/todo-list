@@ -18,7 +18,6 @@ export default {
       editingTask: null,
       selectedTasks: new Set(),
       isDeleteDialogOpen: false
-    
     }
   },
   created() {
@@ -76,10 +75,10 @@ export default {
           this.toggleLoading()
         })
     },
- 
+
     onTaskSave(editedTask) {
       return this.onTaskUpdate(editedTask)
-      .then(() => {
+        .then(() => {
           this.isTaskModalOpen = false
           this.$toast.success('The task has been updated successfully!')
         })
@@ -109,43 +108,44 @@ export default {
           this.$toast.success('The task have been deleted successfully!')
         })
         .catch(this.handleError)
-      },
-      toggleDeleteDialog() {
-        this.isDeleteDialogOpen = !this.isDeleteDialogOpen
-        if (!this.isDeleteDialogOpen) {
+    },
+    toggleDeleteDialog() {
+      this.isDeleteDialogOpen = !this.isDeleteDialogOpen
+      if (!this.isDeleteDialogOpen) {
+        this.selectedTasks.clear()
+      }
+    },
+    onSelectedTasksDelete() {
+      taskApi
+        .deleteTasks([...this.selectedTasks])
+        .then(() => {
+         
+          this.tasks = this.tasks.filter((t) => !this.selectedTasks.has(t._id))
           this.selectedTasks.clear()
-        }
-      },
-      onSelectedTasksDelete() {
-        taskApi
-          .deleteTasks([...this.selectedTasks])
-          .then(() => {
-            this.toggleDeleteDialog()
-            this.tasks = this.tasks.filter((t) => !this.selectedTasks.has(t._id))
-            this.selectedTasks.clear()
-            this.$toast.success('The selected tasks have been deleted successfully!')
-          })
-          .catch(this.handleError)
-      },
-      toggleTaskId(taskId) {
-        if (this.selectedTasks.has(taskId)) {
-          this.selectedTasks.delete(taskId)
-        } else {
-          this.selectedTasks.add(taskId)
-        }
-      },
-      onStatusChange(updatedTask) {
-        this.onTaskUpdate(updatedTask)
-          .then(() => {
-            let message
-            if (updatedTask.status === 'done') {
-              message = 'The task have been completed successfully!'
-            } else {
-              message = 'You have successfully restored the task!'
-            }
-            this.$toast.success(message)
-          })
-          .catch(this.handleError)
+          this.toggleDeleteDialog()
+          this.$toast.success('The selected tasks have been deleted successfully!')
+        })
+        .catch(this.handleError)
+    },
+    toggleTaskId(taskId) {
+      if (this.selectedTasks.has(taskId)) {
+        this.selectedTasks.delete(taskId)
+      } else {
+        this.selectedTasks.add(taskId)
+      }
+    },
+    onStatusChange(updatedTask) {
+      this.onTaskUpdate(updatedTask)
+        .then(() => {
+          let message
+          if (updatedTask.status === 'done') {
+            message = 'The task have been completed successfully!'
+          } else {
+            message = 'You have successfully restored the task!'
+          }
+          this.$toast.success(message)
+        })
+        .catch(this.handleError)
     }
   }
 }
