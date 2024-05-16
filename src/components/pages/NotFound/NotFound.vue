@@ -1,3 +1,3 @@
 <template>
-    <h1>404 page not found!</h1>
-  </template>
+  <div><img src="/src/assets/images/404-error-page-examples-best.webp" alt="" /></div>
+</template>

@@ -1,5 +1,6 @@
-
+import { mapMutations } from 'vuex'
 import TaskModal from '../../TaskModal/TaskModal.vue'
+import ConfirmDialog from '../../ConfirmDialog/ConfirmDialog.vue'
 import Task from '../../Task/Task.vue'
 import TaskApi from '../../../utils/taskApi.js'
 const taskApi = new TaskApi()
@@ -7,13 +8,16 @@ const taskApi = new TaskApi()
 export default {
   components: {
     TaskModal,
-    Task
+    Task,
+    ConfirmDialog
   },
   data() {
     return {
       isTaskModalOpen: false,
       tasks: [],
-      editingTask: null
+      editingTask: null,
+      selectedTasks: new Set(),
+      isDeleteDialogOpen: false
     }
   },
   created() {
@@ -31,20 +35,34 @@ export default {
       }
     }
   },
+  computed: {
+    isDeleteSelectedBtnDisabled() {
+      return !this.selectedTasks.size
+    },
+    confirmDialogText() {
+      return `You are going to delete ${this.selectedTasks.size} task(s), are you sure?`
+    }
+  },
   methods: {
+    ...mapMutations(['toggleLoading']),
     toggleTaskModal() {
       this.isTaskModalOpen = !this.isTaskModalOpen
     },
 
     getTasks() {
+      this.toggleLoading()
       taskApi
         .getTasks()
         .then((tasks) => {
           this.tasks = tasks
         })
         .catch(this.handleError)
+        .finally(() => {
+          this.toggleLoading()
+        })
     },
     onTaskAdd(task) {
+      this.toggleLoading()
       taskApi
         .addNewTask(task)
         .then((newTask) => {
@@ -53,33 +71,24 @@ export default {
           this.$toast.success('The task has been created successfully!')
         })
         .catch(this.handleError)
-    },
-    onTaskStatusChange(editedTask) {
-      taskApi
-        .updateTask(editedTask)
-        .then((updatedTask) => {
-          this.findAndReplaceTask(updatedTask)
-          let message
-          if (updatedTask.status === 'done') {
-            message = 'Congratulations, the task is done!'
-          } else {
-            message = 'You have successfully restored the task!'
-          }
-          this.$toast.success(message)
+        .finally(() => {
+          this.toggleLoading()
         })
-        .catch(this.handleError)
     },
+
     onTaskSave(editedTask) {
-      taskApi
-        .updateTask(editedTask)
-        .then((updatedTask) => {
-          this.findAndReplaceTask(updatedTask)
+      return this.onTaskUpdate(editedTask)
+        .then(() => {
           this.isTaskModalOpen = false
           this.$toast.success('The task has been updated successfully!')
         })
         .catch(this.handleError)
     },
-  
+    onTaskUpdate(editedTask) {
+      return taskApi.updateTask(editedTask).then((updatedTask) => {
+        this.findAndReplaceTask(updatedTask)
+      })
+    },
 
     findAndReplaceTask(updatedTask) {
       const index = this.tasks.findIndex((t) => t._id === updatedTask._id)
@@ -97,6 +106,44 @@ export default {
         .then(() => {
           this.tasks = this.tasks.filter((t) => t._id !== taskId)
           this.$toast.success('The task have been deleted successfully!')
+        })
+        .catch(this.handleError)
+    },
+    toggleDeleteDialog() {
+      this.isDeleteDialogOpen = !this.isDeleteDialogOpen
+      if (!this.isDeleteDialogOpen) {
+        this.selectedTasks.clear()
+      }
+    },
+    onSelectedTasksDelete() {
+      taskApi
+        .deleteTasks([...this.selectedTasks])
+        .then(() => {
+         
+          this.tasks = this.tasks.filter((t) => !this.selectedTasks.has(t._id))
+          this.selectedTasks.clear()
+          this.toggleDeleteDialog()
+          this.$toast.success('The selected tasks have been deleted successfully!')
+        })
+        .catch(this.handleError)
+    },
+    toggleTaskId(taskId) {
+      if (this.selectedTasks.has(taskId)) {
+        this.selectedTasks.delete(taskId)
+      } else {
+        this.selectedTasks.add(taskId)
+      }
+    },
+    onStatusChange(updatedTask) {
+      this.onTaskUpdate(updatedTask)
+        .then(() => {
+          let message
+          if (updatedTask.status === 'done') {
+            message = 'The task have been completed successfully!'
+          } else {
+            message = 'You have successfully restored the task!'
+          }
+          this.$toast.success(message)
         })
         .catch(this.handleError)
     }
